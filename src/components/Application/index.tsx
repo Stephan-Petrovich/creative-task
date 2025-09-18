@@ -1,3 +1,5 @@
+import "./style.css";
+
 const App = () => {
     return <h1>Старт задания</h1>;
 };
