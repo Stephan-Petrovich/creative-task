@@ -1,7 +1,8 @@
-import "./style.css";
+import Router from "@Router/index";
+import { ReactElement } from "react";
 
-const App = () => {
-    return <h1>Старт задания</h1>;
+const App = (): ReactElement => {
+    return <Router />;
 };
 
 export default App;
