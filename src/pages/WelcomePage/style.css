@@ -1,0 +1,69 @@
+.welcome-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 1.5rem;
+    box-sizing: border-box;
+}
+
+.welcome-page-header {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    text-align: center;
+    max-width: 35rem;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-header:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.15);
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.2;
+}
+
+.instruction {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #7f8c8d;
+    margin: 0 0 2.5rem 0;
+    line-height: 1.5;
+}
+
+.link-container {
+    margin-top: 2rem;
+}
+
+.link-container a {
+    display: inline-block;
+    background-color: #3498db;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 0.5rem 1rem rgba(52, 152, 219, 0.3);
+}
+
+.link-container a:hover {
+    background-color: #2980b9;
+    transform: translateY(-0.25rem);
+    box-shadow: 0 0.75rem 1.5rem rgba(52, 152, 219, 0.4);
+}
+
+.link-container a:active {
+    transform: translateY(0);
+    box-shadow: 0 0.25rem 0.5rem rgba(52, 152, 219, 0.3);
+}

@@ -1,5 +1,4 @@
 button {
-    border: none;
     outline: none;
     background: transparent;
 }
@@ -10,14 +9,16 @@ button {
     line-height: 0;
     padding: 15px 20px;
     border-radius: 4px;
+    background-color: rgb(243, 243, 244);
+    border: 0.125rem solid #ccc;
 
-    color: rgb(97, 97, 255);
+    color: #2b2c2c;
 
     transition: background-color 0.35s;
 }
 
 .styled-button:enabled:hover {
-    background-color: rgb(243, 243, 244);
+    background-color: rgb(217, 217, 219);
 
     cursor: pointer;
 }

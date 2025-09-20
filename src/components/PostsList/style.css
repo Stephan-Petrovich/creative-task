@@ -1,0 +1,21 @@
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.end-of-list {
+    text-align: center;
+    padding: 1.5rem;
+    color: #666;
+}

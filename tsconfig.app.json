@@ -20,7 +20,8 @@
             "@assets/*": ["./src/assets/*"],
             "@components/*": ["./src/components/*"],
             "@domains/*": ["./src/domains/*"],
-            "@Router/*": ["./src/Router/*"]
+            "@utils/*": ["./src/utils/*"],
+            "@Router/*": ["src/router/*"]
         },
 
         /* Bundler mode */

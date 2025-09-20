@@ -1,12 +1,25 @@
-import PostsPage from "@pages/PostsPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import routes from "./routes";
+import {
+    BrowserRouter,
+    Route,
+    type RouteObject,
+    Routes,
+} from "react-router-dom";
 import { ReactElement } from "react";
 
 const Router = (): ReactElement => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<PostsPage />} />
+                {routes.map((route: RouteObject) => {
+                    return (
+                        <Route
+                            key={route.id}
+                            path={route.path}
+                            element={route.element}
+                        />
+                    );
+                })}
             </Routes>
         </BrowserRouter>
     );
