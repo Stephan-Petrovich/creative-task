@@ -1,9 +1,8 @@
-import { countOfFetchingPosts } from "@src/utils/constants/index";
+import { IPost } from "@src/domains";
+import { IUser } from "@src/domains";
 
-export const fetchPosts = async () => {
-    const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts?_limit=${countOfFetchingPosts}`
-    );
+export const fetchPosts = async (): Promise<IPost[]> => {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
     if (!response.ok) {
         throw new Error("Failed to fetch posts");
     }
@@ -11,7 +10,7 @@ export const fetchPosts = async () => {
     return data;
 };
 
-export const fetchUsers = async () => {
+export const fetchUsers = async (): Promise<IUser[]> => {
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
     if (!response.ok) {
         throw new Error("Failed to fetch users");
@@ -25,7 +24,7 @@ export const fetchUsers = async () => {
     }));
 };
 
-export const getPostById = async (id: number) => {
+export const getPostById = async (id: number): Promise<IPost> => {
     const response = await fetch(
         `https://jsonplaceholder.typicode.com/posts/${id}`
     );

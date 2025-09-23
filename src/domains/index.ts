@@ -1,11 +1,4 @@
-export interface IInitialPost {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-}
-
-export interface IFinalPost {
+export interface IPost {
     userId: number;
     id: number;
     title: string;

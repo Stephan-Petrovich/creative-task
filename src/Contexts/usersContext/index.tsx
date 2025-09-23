@@ -10,11 +10,14 @@ import { fetchUsers } from "@src/api";
 import { IUser } from "@src/domains";
 
 interface IUsersContext {
-    users: IUser[] | null;
-    usersMap: Map<number, string>;
+    users: IUser[];
+    usersMap: Map<number, string> | null;
 }
 
-const UsersContext = createContext<IUsersContext | null>(null);
+const UsersContext = createContext<IUsersContext>({
+    users: [],
+    usersMap: null,
+});
 
 const UsersProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [users, setUsers] = useState<IUser[]>([]);

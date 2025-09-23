@@ -3,18 +3,35 @@ import PostCard from "../PostCard";
 import { defaultCountOfVisiblePosts } from "@src/utils/constants";
 import { usePostContext } from "@src/Contexts/postsContext";
 import { ReactElement, useState } from "react";
+import { ISelectOption } from "../Select";
 import "./style.css";
 
-const PostsList = (): ReactElement => {
+interface IPostsListProps {
+    searchQuery: string;
+    selectedOption: ISelectOption | null;
+}
+
+const PostsList = ({ searchQuery }: IPostsListProps): ReactElement => {
     const { posts } = usePostContext();
 
     const [visiblePostsCount, setVisiblePostsCount] = useState<number>(
         defaultCountOfVisiblePosts
     );
 
-    const visiblePosts = posts.slice(0, visiblePostsCount);
+    const allPosts = posts.slice(0, visiblePostsCount);
+
+    const filteredPosts = searchQuery
+        ? posts.filter((post) => {
+              const matchingQuery = post.title
+                  .toLowerCase()
+                  .startsWith(searchQuery.toLowerCase());
+              return matchingQuery;
+          })
+        : allPosts;
 
     const isCanContinueList = visiblePostsCount < posts.length;
+    const isEmptyResults = searchQuery && filteredPosts.length === 0;
+    const hasSearchQuery = searchQuery.length > 0;
 
     const handleLoadMore = (): void => {
         setVisiblePostsCount(
@@ -22,20 +39,31 @@ const PostsList = (): ReactElement => {
         );
     };
 
+    if (isEmptyResults) {
+        return (
+            <div className="empty-list-message">
+                No entry matching the entered title was found.
+            </div>
+        );
+    }
+
     return (
-        <div>
+        <div className="posts-list-container">
             <div className="posts-list">
-                {visiblePosts.map((post) => (
+                {filteredPosts.map((post) => (
                     <PostCard key={post.id} post={post} />
                 ))}
             </div>
 
-            {isCanContinueList ? (
+            {!hasSearchQuery && isCanContinueList ? (
                 <div className="load-more-container">
                     <Button label="Show more" onClick={handleLoadMore} />
                 </div>
             ) : (
-                <div className="end-of-list">You have viewed all posts</div>
+                !hasSearchQuery &&
+                filteredPosts.length > 0 && (
+                    <div className="end-of-list">You have viewed all posts</div>
+                )
             )}
         </div>
     );

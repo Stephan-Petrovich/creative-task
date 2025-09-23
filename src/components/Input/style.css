@@ -1,21 +1,21 @@
 .input {
     padding: 0.75rem;
-    border: 0.0625rem solid var(--secondary-border-color);
+    border: 0.0625rem solid #ccc;
     border-radius: 0.5rem;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
-    color: var(--primary-text-color);
+    color: #333333;
 }
 
 .input:focus {
     outline: none;
-    border-color: var(--disabled-text-color);
-    box-shadow: 0 0 0 0.125rem var(--box-shadow-color);
+    border-color: #999;
+    box-shadow: 0 0 0 0.125rem rgba(100, 101, 102, 0.25);
 }
 
 .input:disabled {
-    background-color: var(--light-backrogund-color);
-    color: var(--disabled-text-color);
+    background-color: #f5f5f5;
+    color: #999;
     cursor: not-allowed;
 }
 

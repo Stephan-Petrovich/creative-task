@@ -18,7 +18,7 @@ button {
 }
 
 .styled-button:enabled:hover {
-    background-color: rgb(217, 217, 219);
+    background-color: rgb(226, 226, 228);
 
     cursor: pointer;
 }

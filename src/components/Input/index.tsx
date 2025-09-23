@@ -28,6 +28,7 @@ export interface IInputProps {
     disabled?: boolean;
     required?: boolean;
     autoFocus?: boolean;
+    autoComplete?: string;
     size?: InputSizes;
     style?: CSSProperties;
 }
@@ -47,6 +48,7 @@ const Input = ({
     disabled = false,
     required = false,
     autoFocus = false,
+    autoComplete = "on",
     size,
     style,
 }: IInputProps): ReactElement => {
@@ -65,6 +67,7 @@ const Input = ({
             disabled={disabled}
             required={required}
             autoFocus={autoFocus}
+            autoComplete={autoComplete}
             style={style}
         />
     );

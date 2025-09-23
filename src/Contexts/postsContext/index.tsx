@@ -8,10 +8,10 @@ import React, {
 } from "react";
 import { useUsersContext } from "../usersContext";
 import { fetchPosts } from "@src/api";
-import { IFinalPost } from "@src/domains";
+import { IPost } from "@src/domains";
 
 interface IPostContext {
-    posts: IFinalPost[];
+    posts: IPost[];
 }
 
 const PostsContext = createContext<IPostContext>({ posts: [] });
@@ -19,9 +19,12 @@ const PostsContext = createContext<IPostContext>({ posts: [] });
 const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const { usersMap } = useUsersContext();
 
-    const [originalPosts, setOriginalPosts] = useState<IFinalPost[]>([]);
+    const [originalPosts, setOriginalPosts] = useState<IPost[]>([]);
 
     const postsWithAuthor = useMemo(() => {
+        if (!usersMap || !originalPosts) {
+            return [];
+        }
         return originalPosts.map((post) => {
             const author = usersMap.get(post.userId);
 

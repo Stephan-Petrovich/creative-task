@@ -36,7 +36,7 @@ const SELECT_PLACEHOLDER_DEFAULT: string = "Select any option";
 const Select = ({
     options,
     onChange,
-    className = SELECT_DEFAULT_CLASSNAME,
+    className,
     disabled = false,
     placeholder = SELECT_PLACEHOLDER_DEFAULT,
     size,
@@ -55,12 +55,18 @@ const Select = ({
 
     const handleListClick = (event: MouseEvent<HTMLDivElement>): void => {
         const target = event.target as HTMLElement;
-        const optionElement = target.closest("[data-value]");
+        const optionElement = target.closest(`.${SELECT_DEFAULT_CLASSNAME}`);
 
-        const value = optionElement?.getAttribute("data-value");
-        const option = options.find((option) => option.value === value);
+        if (!optionElement) {
+            return console.error("Option element not found");
+        }
+
+        const value = optionElement.getAttribute("data-value");
+
+        const option = options.find((option: any) => option.value == value);
 
         if (!option) {
+            console.error(`Option with matching "${value}" not found`, options);
             return;
         }
 
@@ -88,7 +94,7 @@ const Select = ({
         <div className="dropdown-container">
             <button
                 type="button"
-                className={`${className} ${size} primary-text`}
+                className={`${SELECT_DEFAULT_CLASSNAME} ${className} ${size} primary-text`}
                 onClick={handleOpen}
                 disabled={disabled}
                 style={style}
@@ -97,17 +103,12 @@ const Select = ({
             </button>
 
             {isOpen && (
-                <div
-                    className="dropdown-list"
-                    onClick={(event: MouseEvent<HTMLDivElement>) =>
-                        handleListClick(event)
-                    }
-                >
+                <div className="dropdown-list" onClick={handleListClick}>
                     {options.map((option: ISelectOption) => (
                         <div
                             data-value={option.value}
                             key={option.value}
-                            className={`${className} ${size} ${
+                            className={`${SELECT_DEFAULT_CLASSNAME} ${className} ${size} ${
                                 selectedOption?.value == option.value
                                     ? "selected"
                                     : ""

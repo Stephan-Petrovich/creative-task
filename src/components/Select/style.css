@@ -10,33 +10,33 @@
     overflow: hidden;
     border-radius: 0.25rem;
     text-overflow: ellipsis;
-    border: 0.0625rem solid var(--secondary-border-color);
-    background-color: var(--light-text-color);
+    border: 0.0625rem solid #ccc;
+    background-color: #ffffff;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 .select-option:focus {
     outline: none;
-    border-color: var(--focus-border-color);
+    border-color: #959aa0;
 }
 
 .select-option:hover {
-    background-color: var(--light-backrogund-color);
+    background-color: #f5f5f5;
 }
 
 .select-option:disabled {
-    background-color: var(--light-backrogund-color);
+    background-color: #f5f5f5;
     cursor: not-allowed;
     opacity: 0.7;
 }
 .select-option.selected {
-    background-color: var(--blue-light-background-color);
-    color: var(--dark-blue-text-color);
+    background-color: rgb(228, 248, 250);
+    color: rgb(31, 116, 165);
 }
 
 .select-option.selected:hover {
-    background-color: var(--aqua-background-color);
-    box-shadow: 0 0 8px var(--blue-box-shadow);
+    background-color: rgb(200, 240, 245);
+    box-shadow: 0 0 8px rgba(126, 243, 243, 0.7);
 }
 
 .select-option.small {
