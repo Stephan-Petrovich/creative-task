@@ -12,3 +12,11 @@ export interface IUser {
     username: string;
     email: string;
 }
+
+export interface IComment {
+    postId: number;
+    id: number;
+    name: string;
+    email: string;
+    body: string;
+}

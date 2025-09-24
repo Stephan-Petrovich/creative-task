@@ -18,7 +18,7 @@ const PostsPage = (): ReactElement => {
         users.map((user) => {
             return {
                 value: user.id,
-                label: user.name,
+                label: user.username,
             };
         }) || [];
 
@@ -37,7 +37,7 @@ const PostsPage = (): ReactElement => {
                 <div className="posts-page-list-container">
                     <PostsList
                         searchQuery={searchQuery}
-                        selectedOption={selectedOption}
+                        selectedAuthor={selectedOption?.label}
                     />
                 </div>
                 <div className="page-list-redactor">

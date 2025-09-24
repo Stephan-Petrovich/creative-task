@@ -1,7 +1,7 @@
 .input {
     padding: 0.75rem;
     border: 0.0625rem solid #ccc;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
     color: #333333;
@@ -10,7 +10,10 @@
 .input:focus {
     outline: none;
     border-color: #999;
-    box-shadow: 0 0 0 0.125rem rgba(100, 101, 102, 0.25);
+}
+
+.input:hover {
+    background-color: #f5f5f5;
 }
 
 .input:disabled {

@@ -6,6 +6,7 @@ import React, {
     useMemo,
     useContext,
 } from "react";
+import { shuffleArraySimple } from "@src/utils/constants";
 import { useUsersContext } from "../usersContext";
 import { fetchPosts } from "@src/api";
 import { IPost } from "@src/domains";
@@ -36,7 +37,8 @@ const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         const loadPosts = async () => {
             try {
                 const fetchedPosts = await fetchPosts();
-                setOriginalPosts(fetchedPosts);
+                const mixedPosts = shuffleArraySimple(fetchedPosts);
+                setOriginalPosts(mixedPosts);
             } catch (error) {
                 console.error("Ошибка загрузки постов:", error);
             }

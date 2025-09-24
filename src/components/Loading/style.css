@@ -1,0 +1,17 @@
+.loading-alert-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    font-size: 1.3rem;
+    font-weight: 400;
+    padding: 1.25rem;
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid rgb(66, 218, 81);
+    background-color: rgba(155, 220, 162, 0.285);
+    color: gray;
+}

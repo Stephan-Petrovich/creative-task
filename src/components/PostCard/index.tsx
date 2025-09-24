@@ -1,11 +1,11 @@
 import { capitalizeFirstLetter } from "@src/utils/constants";
-import { IFinalPost } from "@src/domains";
 import { Link } from "react-router-dom";
+import { IPost } from "@src/domains";
 import { ReactElement } from "react";
 import "./style.css";
 
 interface IPostCardProps {
-    post: IFinalPost;
+    post: IPost;
 }
 
 const PostCard = ({ post }: IPostCardProps): ReactElement => {

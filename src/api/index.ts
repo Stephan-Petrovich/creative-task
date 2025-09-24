@@ -1,5 +1,4 @@
-import { IPost } from "@src/domains";
-import { IUser } from "@src/domains";
+import { IPost, IUser, IComment } from "@src/domains";
 
 export const fetchPosts = async (): Promise<IPost[]> => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
@@ -30,6 +29,33 @@ export const getPostById = async (id: number): Promise<IPost> => {
     );
     if (!response.ok) {
         throw new Error("Failed to fetch concrete post");
+    }
+    const data = await response.json();
+    return data;
+};
+
+export const getUserById = async (id: number): Promise<IUser> => {
+    const response = await fetch(
+        `https://jsonplaceholder.typicode.com/users/${id}`
+    );
+    if (!response.ok) {
+        throw new Error("Failed to load concrete user");
+    }
+    const data = await response.json();
+    return {
+        id: data.id,
+        name: data.name,
+        username: data.username,
+        email: data.email,
+    };
+};
+
+export const getCommentsById = async (id: number): Promise<IComment[]> => {
+    const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${id}/comments`
+    );
+    if (!response.ok) {
+        throw new Error("Failed to load concrete comments");
     }
     const data = await response.json();
     return data;
