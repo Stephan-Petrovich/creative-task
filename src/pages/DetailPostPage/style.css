@@ -46,12 +46,36 @@
     color: #2b2c2c;
 }
 
+.comments-header {
+    text-align: center;
+}
+
+.add-comment-button {
+    text-align: center;
+}
+
 .comments-of-current-post {
     display: flex;
     flex-direction: column;
     margin-left: 4rem;
 }
 
-.comments-header {
-    text-align: center;
+.add-comment-form-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-comment-form-wrapper {
+    background: white;
+    border-radius: 0.75rem;
+    max-width: 43rem;
+    width: 100%;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
 }

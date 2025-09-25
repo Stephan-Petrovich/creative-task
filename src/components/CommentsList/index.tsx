@@ -11,7 +11,7 @@ const CommentsList = ({ comments }: ICommentsListProps): ReactElement => {
     return (
         <div className="comments-list">
             {comments.map((comment: IComment) => (
-                <Comment comment={comment} />
+                <Comment key={comment.id} comment={comment} />
             ))}
         </div>
     );

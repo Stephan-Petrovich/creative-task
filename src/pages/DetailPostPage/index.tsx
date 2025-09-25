@@ -1,5 +1,7 @@
+import Button from "@src/components/Button";
 import Loading from "@src/components/Loading";
 import CommentsList from "@src/components/CommentsList";
+import FormAddComment from "@src/components/FormAddComment";
 import { getPostById, getUserById, getCommentsById } from "@src/api";
 import { capitalizeFirstLetter } from "@src/utils/constants";
 import { ReactElement, useEffect, useState } from "react";
@@ -10,12 +12,26 @@ import "./style.css";
 const DetailPostPage = (): ReactElement => {
     const [currentPost, setCurrentPost] = useState<IPost | null>(null);
     const [currentUser, setCurrentUser] = useState<IUser | null>(null);
-    const [currentComments, setCurrentComments] = useState<IComment[] | null>(
-        null
-    );
+    const [currentComments, setCurrentComments] = useState<IComment[]>([]);
+
+    const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
 
     const { id } = useParams<{ id: string }>();
     const postId = parseInt(id || "");
+
+    const handleOpenAddForm = (): void => {
+        setIsFormOpen(true);
+    };
+
+    const handleCreateComment = (newComment: IComment): void => {
+        setCurrentComments((prevComments) => {
+            if (!prevComments) {
+                return [newComment];
+            }
+
+            return [newComment, ...prevComments];
+        });
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -43,7 +59,7 @@ const DetailPostPage = (): ReactElement => {
         fetchData();
     }, [postId]);
 
-    if (!currentPost || !currentUser || !currentComments) {
+    if (!currentPost || !currentUser) {
         return <Loading />;
     }
 
@@ -62,8 +78,25 @@ const DetailPostPage = (): ReactElement => {
 
             <div className="comments-of-current-post">
                 <h3 className="comments-header">Comments on the post:</h3>
+
+                <div className="add-comment-button">
+                    <Button label="Add comment" onClick={handleOpenAddForm} />
+                </div>
+
                 <CommentsList comments={currentComments} />
             </div>
+
+            {isFormOpen && (
+                <div className="add-comment-form-container">
+                    <div className="add-comment-form-wrapper">
+                        <FormAddComment
+                            loadNewComment={handleCreateComment}
+                            postId={postId}
+                            handleClose={(isOpen) => setIsFormOpen(isOpen)}
+                        />
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

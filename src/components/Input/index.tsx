@@ -48,7 +48,7 @@ const Input = ({
     disabled = false,
     required = false,
     autoFocus = false,
-    autoComplete = "on",
+    autoComplete = "off",
     size,
     style,
 }: IInputProps): ReactElement => {

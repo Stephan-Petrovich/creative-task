@@ -1,7 +1,7 @@
 import { IPost, IUser, IComment } from "@src/domains";
 
 export const fetchPosts = async (): Promise<IPost[]> => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
     if (!response.ok) {
         throw new Error("Failed to fetch posts");
     }
@@ -58,5 +58,35 @@ export const getCommentsById = async (id: number): Promise<IComment[]> => {
         throw new Error("Failed to load concrete comments");
     }
     const data = await response.json();
+    return data;
+};
+
+export const fetchNewComment = async (
+    postId: number,
+    name: string,
+    email: string,
+    body: string
+) => {
+    const response = await fetch(
+        "https://jsonplaceholder.typicode.com/comments",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                postId,
+                name: name.trim(),
+                email: email.trim(),
+                body: body.trim(),
+            }),
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to add comment");
+    }
+
+    const data = response.json();
     return data;
 };

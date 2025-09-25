@@ -1,4 +1,5 @@
 export const defaultCountOfVisiblePosts: number = 10;
+export const countOfTextareaCols: number = 60;
 
 export const capitalizeFirstLetter = (text: string): string => {
     if (!text) {
