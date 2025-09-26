@@ -7,7 +7,7 @@ import {
     useContext,
 } from "react";
 import { fetchUsers } from "@src/api";
-import { IUser } from "@src/domains";
+import { IUser } from "@src/domains/types";
 
 interface IUsersContext {
     users: IUser[];

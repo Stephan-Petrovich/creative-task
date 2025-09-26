@@ -1,5 +1,5 @@
 import { capitalizeFirstLetter } from "@src/utils/constants";
-import { IComment } from "@src/domains";
+import { IComment } from "@src/domains/types";
 import { ReactElement } from "react";
 import "./style.css";
 

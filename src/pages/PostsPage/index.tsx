@@ -5,6 +5,7 @@ import { useUsersContext } from "@src/Contexts/usersContext";
 import { inputStyles } from "@src/utils/constants";
 import { ReactElement, useState } from "react";
 import "./style.css";
+import useDebounce from "@src/hooks/useDebaunce";
 
 const PostsPage = (): ReactElement => {
     const { users } = useUsersContext();
@@ -13,6 +14,8 @@ const PostsPage = (): ReactElement => {
     const [selectedOption, setSelectedOption] = useState<ISelectOption | null>(
         null
     );
+    const [debouncedSearchQuery, setDebouncedSearchQuery] =
+        useState<string>("");
 
     const selectOptions: ISelectOption[] =
         users.map((user) => {
@@ -22,8 +25,13 @@ const PostsPage = (): ReactElement => {
             };
         }) || [];
 
+    const debouncedSetSearch = useDebounce((query: string) => {
+        setDebouncedSearchQuery(query);
+    }, 300);
+
     const handleSearchQuery = (query: string) => {
         setSearchQuery(query);
+        debouncedSetSearch(query);
     };
 
     const handleSelectOption = (selectedOption: ISelectOption): void => {
@@ -36,7 +44,7 @@ const PostsPage = (): ReactElement => {
             <div className="posts-page-body">
                 <div className="posts-page-list-container">
                     <PostsList
-                        searchQuery={searchQuery}
+                        searchQuery={debouncedSearchQuery}
                         selectedAuthor={selectedOption?.label}
                     />
                 </div>

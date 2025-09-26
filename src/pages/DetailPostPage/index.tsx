@@ -1,11 +1,12 @@
 import Button from "@src/components/Button";
 import Loading from "@src/components/Loading";
 import CommentsList from "@src/components/CommentsList";
+import EditPostModal from "@src/components/EditPostModal";
 import FormAddComment from "@src/components/FormAddComment";
 import { getPostById, getUserById, getCommentsById } from "@src/api";
 import { capitalizeFirstLetter } from "@src/utils/constants";
+import { IComment, IPost, IUser } from "@src/domains/types";
 import { ReactElement, useEffect, useState } from "react";
-import { IComment, IPost, IUser } from "@src/domains";
 import { useParams } from "react-router-dom";
 import "./style.css";
 
@@ -15,12 +16,17 @@ const DetailPostPage = (): ReactElement => {
     const [currentComments, setCurrentComments] = useState<IComment[]>([]);
 
     const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
 
     const { id } = useParams<{ id: string }>();
     const postId = parseInt(id || "");
 
-    const handleOpenAddForm = (): void => {
-        setIsFormOpen(true);
+    const handleOpenAddForm = (isOpen: boolean) => {
+        setIsFormOpen(isOpen);
+    };
+
+    const handleOpenEditModal = (isOpen: boolean) => {
+        setIsEditModalOpen(isOpen);
     };
 
     const handleCreateComment = (newComment: IComment): void => {
@@ -31,6 +37,10 @@ const DetailPostPage = (): ReactElement => {
 
             return [newComment, ...prevComments];
         });
+    };
+
+    const handlePostUpdated = (updatedPost: IPost): void => {
+        setCurrentPost(updatedPost);
     };
 
     useEffect(() => {
@@ -74,13 +84,27 @@ const DetailPostPage = (): ReactElement => {
                 <div className="current-post-body">
                     <p>{`Body: ${capitalizeFirstLetter(currentPost.body)}.`}</p>
                 </div>
+
+                <div className="edit-post-button-container">
+                    <Button
+                        label="Edit post"
+                        onClick={() => {
+                            handleOpenEditModal(true);
+                        }}
+                    />
+                </div>
             </div>
 
             <div className="comments-of-current-post">
                 <h3 className="comments-header">Comments on the post:</h3>
 
                 <div className="add-comment-button">
-                    <Button label="Add comment" onClick={handleOpenAddForm} />
+                    <Button
+                        label="Add comment"
+                        onClick={() => {
+                            handleOpenAddForm(true);
+                        }}
+                    />
                 </div>
 
                 <CommentsList comments={currentComments} />
@@ -92,7 +116,19 @@ const DetailPostPage = (): ReactElement => {
                         <FormAddComment
                             loadNewComment={handleCreateComment}
                             postId={postId}
-                            handleClose={(isOpen) => setIsFormOpen(isOpen)}
+                            handleClose={handleOpenAddForm}
+                        />
+                    </div>
+                </div>
+            )}
+
+            {isEditModalOpen && (
+                <div className="edit-post-form-container">
+                    <div className="edit-post-form-wrapper">
+                        <EditPostModal
+                            post={currentPost}
+                            onUpdatePost={handlePostUpdated}
+                            onClose={handleOpenEditModal}
                         />
                     </div>
                 </div>

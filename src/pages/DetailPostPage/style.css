@@ -60,7 +60,8 @@
     margin-left: 4rem;
 }
 
-.add-comment-form-container {
+.add-comment-form-container,
+.edit-post-form-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -72,10 +73,15 @@
     align-items: center;
 }
 
-.add-comment-form-wrapper {
+.add-comment-form-wrapper,
+.edit-post-form-wrapper {
     background: white;
     border-radius: 0.75rem;
     max-width: 43rem;
     width: 100%;
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+}
+
+.edit-post-button-container {
+    margin: 0 0.5rem 0.5rem auto;
 }

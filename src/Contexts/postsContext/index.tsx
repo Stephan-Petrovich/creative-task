@@ -9,13 +9,17 @@ import React, {
 import { shuffleArraySimple } from "@src/utils/constants";
 import { useUsersContext } from "../usersContext";
 import { fetchPosts } from "@src/api";
-import { IPost } from "@src/domains";
+import { IPost } from "@src/domains/types";
 
 interface IPostContext {
     posts: IPost[];
+    removePost: (postId: number) => void;
 }
 
-const PostsContext = createContext<IPostContext>({ posts: [] });
+const PostsContext = createContext<IPostContext>({
+    posts: [],
+    removePost: () => {},
+});
 
 const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const { usersMap } = useUsersContext();
@@ -33,6 +37,12 @@ const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         });
     }, [originalPosts, usersMap]);
 
+    const removePost = (postId: number): void => {
+        setOriginalPosts((prevPosts) =>
+            prevPosts.filter((post) => post.id !== postId)
+        );
+    };
+
     useEffect(() => {
         const loadPosts = async () => {
             try {
@@ -48,7 +58,7 @@ const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }, []);
 
     return (
-        <PostsContext.Provider value={{ posts: postsWithAuthor }}>
+        <PostsContext.Provider value={{ posts: postsWithAuthor, removePost }}>
             {children}
         </PostsContext.Provider>
     );

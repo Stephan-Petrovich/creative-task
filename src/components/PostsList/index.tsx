@@ -1,9 +1,10 @@
 import Button from "../Button";
+import Loading from "../Loading";
 import PostCard from "../PostCard";
 import { defaultCountOfVisiblePosts } from "@src/utils/constants";
 import { usePostContext } from "@src/Contexts/postsContext";
 import { ReactElement, ReactNode, useState } from "react";
-import { IPost } from "@src/domains";
+import { IPost } from "@src/domains/types";
 import "./style.css";
 
 interface IPostsListProps {
@@ -54,6 +55,10 @@ const PostsList = ({
                 No entry matching the entered title was found.
             </div>
         );
+    }
+
+    if (!posts) {
+        return <Loading />;
     }
 
     return (

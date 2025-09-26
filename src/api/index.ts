@@ -1,4 +1,4 @@
-import { IPost, IUser, IComment } from "@src/domains";
+import { IPost, IUser, IComment } from "@src/domains/types";
 
 export const fetchPosts = async (): Promise<IPost[]> => {
     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -61,7 +61,7 @@ export const getCommentsById = async (id: number): Promise<IComment[]> => {
     return data;
 };
 
-export const fetchNewComment = async (
+export const addNewComment = async (
     postId: number,
     name: string,
     email: string,
@@ -89,4 +89,39 @@ export const fetchNewComment = async (
 
     const data = response.json();
     return data;
+};
+
+export const updatePost = async (
+    id: number,
+    postData: { title: string; body: string }
+): Promise<IPost> => {
+    const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postData),
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to update post");
+    }
+
+    const data = response.json();
+    return data;
+};
+
+export const deletePost = async (id: number) => {
+    const response = await fetch(
+        `https://jsonplaceholder.typicode.com/posts/${id}`,
+        {
+            method: "DELETE",
+        }
+    );
+    if (!response.ok) {
+        throw new Error("Failed to delete post");
+    }
 };

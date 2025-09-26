@@ -4,8 +4,8 @@ import TextArea, { TextareaSizes } from "../Textarea";
 import Input, { InputSizes, TypesOfInput } from "../Input";
 import { countOfTextareaCols } from "@src/utils/constants";
 import { FormEvent, ReactElement, useState } from "react";
-import { fetchNewComment } from "@src/api";
-import { IComment } from "@src/domains";
+import { addNewComment } from "@src/api";
+import { IComment } from "@src/domains/types";
 import "./style.css";
 
 interface IFormAddCommentProps {
@@ -50,7 +50,7 @@ const FormAddComment = ({
         setIsSubmitting(true);
 
         try {
-            const newComment: IComment = await fetchNewComment(
+            const newComment: IComment = await addNewComment(
                 postId,
                 name,
                 email,

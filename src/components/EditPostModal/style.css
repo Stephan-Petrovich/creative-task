@@ -1,0 +1,33 @@
+.edit-modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.325rem;
+    gap: 0.625rem;
+    margin: 1rem 1rem 1rem 1rem;
+    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+}
+
+.form-post-title,
+.form-post-body {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-post-title {
+    margin: 0 0 1rem 1rem;
+}
+
+.form-post-body {
+    margin: 0 0 1rem 0.2rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}

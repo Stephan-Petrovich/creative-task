@@ -1,5 +1,5 @@
 import Comment from "../Comment";
-import { IComment } from "@src/domains";
+import { IComment } from "@src/domains/types";
 import { ReactElement } from "react";
 import "./style.css";
 
