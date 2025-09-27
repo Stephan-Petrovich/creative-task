@@ -8,8 +8,8 @@ import React, {
 } from "react";
 import { shuffleArraySimple } from "@src/utils/constants";
 import { useUsersContext } from "../usersContext";
-import { fetchPosts } from "@src/api";
 import { IPost } from "@src/domains/types";
+import { fetchPosts } from "@src/api";
 
 interface IPostContext {
     posts: IPost[];

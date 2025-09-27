@@ -3,10 +3,10 @@ import Loading from "@src/components/Loading";
 import CommentsList from "@src/components/CommentsList";
 import EditPostModal from "@src/components/EditPostModal";
 import FormAddComment from "@src/components/FormAddComment";
+import { ReactElement, useCallback, useEffect, useState } from "react";
 import { getPostById, getUserById, getCommentsById } from "@src/api";
 import { capitalizeFirstLetter } from "@src/utils/constants";
 import { IComment, IPost, IUser } from "@src/domains/types";
-import { ReactElement, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./style.css";
 
@@ -21,15 +21,15 @@ const DetailPostPage = (): ReactElement => {
     const { id } = useParams<{ id: string }>();
     const postId = parseInt(id || "");
 
-    const handleOpenAddForm = (isOpen: boolean) => {
+    const handleOpenAddForm = useCallback((isOpen: boolean) => {
         setIsFormOpen(isOpen);
-    };
+    }, []);
 
-    const handleOpenEditModal = (isOpen: boolean) => {
+    const handleOpenEditModal = useCallback((isOpen: boolean) => {
         setIsEditModalOpen(isOpen);
-    };
+    }, []);
 
-    const handleCreateComment = (newComment: IComment): void => {
+    const handleCreateComment = useCallback((newComment: IComment): void => {
         setCurrentComments((prevComments) => {
             if (!prevComments) {
                 return [newComment];
@@ -37,7 +37,7 @@ const DetailPostPage = (): ReactElement => {
 
             return [newComment, ...prevComments];
         });
-    };
+    }, []);
 
     const handlePostUpdated = (updatedPost: IPost): void => {
         setCurrentPost(updatedPost);

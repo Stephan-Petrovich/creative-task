@@ -1,11 +1,12 @@
 import PostsList from "@src/components/PostsList";
+import useDebounce from "@src/hooks/useDebaunce";
 import Select, { ISelectOption, SelectSizes } from "@src/components/Select";
 import Input, { InputSizes, TypesOfInput } from "@src/components/Input";
 import { useUsersContext } from "@src/Contexts/usersContext";
+import { ReactElement, useCallback, useState } from "react";
 import { inputStyles } from "@src/utils/constants";
-import { ReactElement, useState } from "react";
+
 import "./style.css";
-import useDebounce from "@src/hooks/useDebaunce";
 
 const PostsPage = (): ReactElement => {
     const { users } = useUsersContext();
@@ -29,10 +30,10 @@ const PostsPage = (): ReactElement => {
         setDebouncedSearchQuery(query);
     }, 300);
 
-    const handleSearchQuery = (query: string) => {
+    const handleSearchQuery = useCallback((query: string) => {
         setSearchQuery(query);
         debouncedSetSearch(query);
-    };
+    }, []);
 
     const handleSelectOption = (selectedOption: ISelectOption): void => {
         setSelectedOption(selectedOption);

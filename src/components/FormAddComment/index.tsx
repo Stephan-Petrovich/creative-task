@@ -4,8 +4,8 @@ import TextArea, { TextareaSizes } from "../Textarea";
 import Input, { InputSizes, TypesOfInput } from "../Input";
 import { countOfTextareaCols } from "@src/utils/constants";
 import { FormEvent, ReactElement, useState } from "react";
-import { addNewComment } from "@src/api";
 import { IComment } from "@src/domains/types";
+import { addNewComment } from "@src/api";
 import "./style.css";
 
 interface IFormAddCommentProps {

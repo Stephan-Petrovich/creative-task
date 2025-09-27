@@ -1,6 +1,6 @@
 import { capitalizeFirstLetter } from "@src/utils/constants";
-import { Link } from "react-router-dom";
 import { IPost } from "@src/domains/types";
+import { Link } from "react-router-dom";
 import { ReactElement } from "react";
 import "./style.css";
 
