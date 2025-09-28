@@ -1,20 +1,30 @@
 import { IPost, IUser, IComment } from "@src/domains/types";
+import { BASE_URL, Endpoints } from "@src/utils/constants";
+
+const fullUrlOfPosts: string = `${BASE_URL}/${Endpoints.POSTS}`;
+const fullUrlOfUsers: string = `${BASE_URL}/${Endpoints.USERS}`;
+const fullUrlOfComments: string = `${BASE_URL}/${Endpoints.COMMENTS}`;
 
 export const fetchPosts = async (): Promise<IPost[]> => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const response = await fetch(fullUrlOfPosts);
+
     if (!response.ok) {
         throw new Error("Failed to fetch posts");
     }
+
     const data = await response.json();
     return data;
 };
 
 export const fetchUsers = async (): Promise<IUser[]> => {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const response = await fetch(fullUrlOfUsers);
+
     if (!response.ok) {
         throw new Error("Failed to fetch users");
     }
+
     const data = await response.json();
+
     return data.map((user: any) => ({
         id: user.id,
         name: user.name,
@@ -24,23 +34,27 @@ export const fetchUsers = async (): Promise<IUser[]> => {
 };
 
 export const getPostById = async (id: number): Promise<IPost> => {
-    const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${id}`
-    );
+    const fullUrlOfDefinitPost: string = `${fullUrlOfPosts}/${id}`;
+
+    const response = await fetch(fullUrlOfDefinitPost);
+
     if (!response.ok) {
         throw new Error("Failed to fetch concrete post");
     }
+
     const data = await response.json();
     return data;
 };
 
 export const getUserById = async (id: number): Promise<IUser> => {
-    const response = await fetch(
-        `https://jsonplaceholder.typicode.com/users/${id}`
-    );
+    const fullUrlOfDefinitUser: string = `${fullUrlOfUsers}/${id}`;
+
+    const response = await fetch(fullUrlOfDefinitUser);
+
     if (!response.ok) {
         throw new Error("Failed to load concrete user");
     }
+
     const data = await response.json();
     return {
         id: data.id,
@@ -51,12 +65,14 @@ export const getUserById = async (id: number): Promise<IUser> => {
 };
 
 export const getCommentsById = async (id: number): Promise<IComment[]> => {
-    const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${id}/comments`
-    );
+    const fullUrlOfDefinitPostComments: string = `${fullUrlOfPosts}/${id}/${Endpoints.COMMENTS}`;
+
+    const response = await fetch(fullUrlOfDefinitPostComments);
+
     if (!response.ok) {
         throw new Error("Failed to load concrete comments");
     }
+
     const data = await response.json();
     return data;
 };
@@ -67,21 +83,18 @@ export const addNewComment = async (
     email: string,
     body: string
 ) => {
-    const response = await fetch(
-        "https://jsonplaceholder.typicode.com/comments",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                postId,
-                name: name.trim(),
-                email: email.trim(),
-                body: body.trim(),
-            }),
-        }
-    );
+    const response = await fetch(fullUrlOfComments, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            postId,
+            name: name.trim(),
+            email: email.trim(),
+            body: body.trim(),
+        }),
+    });
 
     if (!response.ok) {
         throw new Error("Failed to add comment");
@@ -95,16 +108,15 @@ export const updatePost = async (
     id: number,
     postData: { title: string; body: string }
 ): Promise<IPost> => {
-    const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
-        {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(postData),
-        }
-    );
+    const fullUrlOfDefinitePost: string = `${fullUrlOfPosts}/${id}`;
+
+    const response = await fetch(fullUrlOfDefinitePost, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+    });
 
     if (!response.ok) {
         throw new Error("Failed to update post");
@@ -115,12 +127,12 @@ export const updatePost = async (
 };
 
 export const deletePost = async (id: number) => {
-    const response = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${id}`,
-        {
-            method: "DELETE",
-        }
-    );
+    const fullUrlOfDefinitePost: string = `${fullUrlOfPosts}/${id}`;
+
+    const response = await fetch(fullUrlOfDefinitePost, {
+        method: "DELETE",
+    });
+
     if (!response.ok) {
         throw new Error("Failed to delete post");
     }

@@ -4,6 +4,14 @@ export const COUNT_OF_TEXTAREA_COLS: number = 60;
 
 export const INPUT_RESPONSE_TIMER: number = 300;
 
+export const BASE_URL: string = "https://jsonplaceholder.typicode.com";
+
+export enum Endpoints {
+    POSTS = "posts",
+    USERS = "users",
+    COMMENTS = "comments",
+}
+
 export const capitalizeFirstLetter = (text: string): string => {
     if (!text) {
         return text;

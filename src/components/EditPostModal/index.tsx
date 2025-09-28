@@ -16,7 +16,7 @@ import "./style.css";
 interface IEditPostModalProps {
     post: IPost;
     onUpdatePost: (updatedPost: IPost) => void;
-    onClose: (isOpen: boolean) => void;
+    onClose: () => void;
 }
 
 const EditPostModal = ({
@@ -56,7 +56,7 @@ const EditPostModal = ({
 
             onUpdatePost(updatedPost);
 
-            onClose(false);
+            onClose();
         } catch (error) {
             console.error("Failed update post");
         } finally {
@@ -76,7 +76,7 @@ const EditPostModal = ({
 
             removePost(post.id);
 
-            onClose(false);
+            onClose();
 
             navigate("/posts");
         } catch (error) {
@@ -124,7 +124,7 @@ const EditPostModal = ({
                     <Button
                         label="Cancel"
                         onClick={() => {
-                            onClose(false);
+                            onClose();
                         }}
                     />
                 </div>

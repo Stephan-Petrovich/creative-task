@@ -116,7 +116,7 @@ const DetailPostPage = (): ReactElement => {
                         <FormAddComment
                             loadNewComment={handleCreateComment}
                             postId={postId}
-                            handleClose={handleOpenAddForm}
+                            handleClose={() => handleOpenAddForm(false)}
                         />
                     </div>
                 </div>
@@ -128,7 +128,7 @@ const DetailPostPage = (): ReactElement => {
                         <EditPostModal
                             post={currentPost}
                             onUpdatePost={handlePostUpdated}
-                            onClose={handleOpenEditModal}
+                            onClose={() => handleOpenEditModal(false)}
                         />
                     </div>
                 </div>
