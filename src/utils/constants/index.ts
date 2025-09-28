@@ -2,6 +2,8 @@ export const DEFAULT_COUNT_OF_VISIBLE_POSTS: number = 10;
 
 export const COUNT_OF_TEXTAREA_COLS: number = 60;
 
+export const INPUT_RESPONSE_TIMER: number = 300;
+
 export const capitalizeFirstLetter = (text: string): string => {
     if (!text) {
         return text;

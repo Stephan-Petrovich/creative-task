@@ -1,10 +1,10 @@
-import useDebounce from "@src/hooks/useDebaunce";
-import PostsList from "@src/components/PostsList";
+import useDebounce from "@src/hooks/useDebounce";
+import FilteredPostsList from "@src/components/FilteredPostsList";
 import Input, { InputSizes, TypesOfInput } from "@src/components/Input";
 import Select, { ISelectOption, SelectSizes } from "@src/components/Select";
+import { INPUT_RESPONSE_TIMER, INPUT_STYLES } from "@src/utils/constants";
 import { useUsersContext } from "@src/Contexts/usersContext";
 import { ReactElement, useCallback, useState } from "react";
-import { INPUT_STYLES } from "@src/utils/constants";
 import "./style.css";
 
 const PostsPage = (): ReactElement => {
@@ -28,7 +28,7 @@ const PostsPage = (): ReactElement => {
 
     const debouncedSetSearch = useDebounce((query: string) => {
         setDebouncedSearchQuery(query);
-    }, 300);
+    }, INPUT_RESPONSE_TIMER);
 
     const handleSearchQuery = useCallback((query: string) => {
         setSearchQuery(query);
@@ -44,9 +44,13 @@ const PostsPage = (): ReactElement => {
             <header className="posts-page-header">All posts</header>
             <div className="posts-page-body">
                 <div className="posts-page-list-container">
-                    <PostsList
+                    <FilteredPostsList
                         searchQuery={debouncedSearchQuery}
-                        selectedAuthor={selectedOption?.label}
+                        selectedAuthor={
+                            selectedOption?.label
+                                ? String(selectedOption.label)
+                                : null
+                        }
                     />
                 </div>
                 <div className="page-list-redactor">

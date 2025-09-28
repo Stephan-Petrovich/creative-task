@@ -26,13 +26,9 @@ const UsersContext = createContext<IUsersContext>({
 const UsersProvider = ({ children }: UsersProviderProps): ReactElement => {
     const [users, setUsers] = useState<IUser[]>([]);
 
-    const getUsersMap = (users: IUser[]) => {
-        if (!users) return new Map<number, string>();
-
-        return new Map(users.map((user) => [user.id, user.username]));
-    };
-
-    const usersMap = getUsersMap(users);
+    const usersMap = users
+        ? new Map(users.map((user) => [user.id, user.username]))
+        : new Map<number, string>();
 
     useEffect(() => {
         const loadUsers = async () => {
