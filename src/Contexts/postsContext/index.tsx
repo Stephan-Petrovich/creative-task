@@ -1,10 +1,10 @@
-import React, {
+import {
     createContext,
     ReactNode,
     useEffect,
     useState,
-    useMemo,
     useContext,
+    ReactElement,
 } from "react";
 import { shuffleArraySimple } from "@src/utils/constants";
 import { useUsersContext } from "../usersContext";
@@ -16,26 +16,36 @@ interface IPostContext {
     removePost: (postId: number) => void;
 }
 
+interface PostsProviderProps {
+    children: ReactNode;
+}
+
 const PostsContext = createContext<IPostContext>({
     posts: [],
     removePost: () => {},
 });
 
-const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+const PostsProvider = ({ children }: PostsProviderProps): ReactElement => {
     const { usersMap } = useUsersContext();
 
     const [originalPosts, setOriginalPosts] = useState<IPost[]>([]);
 
-    const postsWithAuthor = useMemo(() => {
+    const getPostsWithAuthor = (
+        posts: IPost[],
+        usersMap: Map<number, string> | null
+    ): IPost[] => {
         if (!usersMap || !originalPosts) {
             return [];
         }
-        return originalPosts.map((post) => {
+
+        return posts.map((post) => {
             const author = usersMap.get(post.userId);
 
             return { ...post, userName: author };
         });
-    }, [originalPosts, usersMap]);
+    };
+
+    const postsWithAuthor = getPostsWithAuthor(originalPosts, usersMap);
 
     const removePost = (postId: number): void => {
         setOriginalPosts((prevPosts) =>
@@ -47,7 +57,9 @@ const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         const loadPosts = async () => {
             try {
                 const fetchedPosts = await fetchPosts();
+
                 const mixedPosts = shuffleArraySimple(fetchedPosts);
+
                 setOriginalPosts(mixedPosts);
             } catch (error) {
                 console.error("Ошибка загрузки постов:", error);
@@ -66,9 +78,11 @@ const PostsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 const usePostContext = () => {
     const context = useContext(PostsContext);
+
     if (context === null) {
         throw new Error("usePostContext must be used within a PostsProvider");
     }
+
     return context;
 };
 

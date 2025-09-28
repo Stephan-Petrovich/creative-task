@@ -1,5 +1,6 @@
-export const defaultCountOfVisiblePosts: number = 10;
-export const countOfTextareaCols: number = 60;
+export const DEFAULT_COUNT_OF_VISIBLE_POSTS: number = 10;
+
+export const COUNT_OF_TEXTAREA_COLS: number = 60;
 
 export const capitalizeFirstLetter = (text: string): string => {
     if (!text) {
@@ -12,7 +13,7 @@ export const shuffleArraySimple = <T>(array: T[]): T[] => {
     return [...array].sort(() => Math.random() - 0.5);
 };
 
-export const inputStyles = {
+export const INPUT_STYLES = {
     width: "100%",
     maxWidth: "42.5rem",
     minWidth: "300px",

@@ -1,22 +1,22 @@
-import PostsList from "@src/components/PostsList";
 import useDebounce from "@src/hooks/useDebaunce";
-import Select, { ISelectOption, SelectSizes } from "@src/components/Select";
+import PostsList from "@src/components/PostsList";
 import Input, { InputSizes, TypesOfInput } from "@src/components/Input";
+import Select, { ISelectOption, SelectSizes } from "@src/components/Select";
 import { useUsersContext } from "@src/Contexts/usersContext";
 import { ReactElement, useCallback, useState } from "react";
-import { inputStyles } from "@src/utils/constants";
-
+import { INPUT_STYLES } from "@src/utils/constants";
 import "./style.css";
 
 const PostsPage = (): ReactElement => {
     const { users } = useUsersContext();
 
     const [searchQuery, setSearchQuery] = useState<string>("");
+    const [debouncedSearchQuery, setDebouncedSearchQuery] =
+        useState<string>("");
+
     const [selectedOption, setSelectedOption] = useState<ISelectOption | null>(
         null
     );
-    const [debouncedSearchQuery, setDebouncedSearchQuery] =
-        useState<string>("");
 
     const selectOptions: ISelectOption[] =
         users.map((user) => {
@@ -57,7 +57,7 @@ const PostsPage = (): ReactElement => {
                         variant={TypesOfInput.PRIMARY}
                         size={InputSizes.MEDIUM}
                         autoComplete="off"
-                        style={inputStyles}
+                        style={INPUT_STYLES}
                     />
                     <Select
                         options={selectOptions}

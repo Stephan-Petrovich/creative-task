@@ -2,7 +2,7 @@ import Error from "../Error";
 import Button from "../Button";
 import TextArea, { TextareaSizes } from "../Textarea";
 import Input, { InputSizes, TypesOfInput } from "../Input";
-import { countOfTextareaCols } from "@src/utils/constants";
+import { COUNT_OF_TEXTAREA_COLS } from "@src/utils/constants";
 import { FormEvent, ReactElement, useState } from "react";
 import { IComment } from "@src/domains/types";
 import { addNewComment } from "@src/api";
@@ -64,9 +64,11 @@ const FormAddComment = ({
             setContent("");
         } catch (error) {
             setError("Error adding comments");
+
             console.error("Add comment error:", error);
         } finally {
             setIsSubmitting(false);
+
             handleClose(false);
         }
     };
@@ -111,7 +113,7 @@ const FormAddComment = ({
                     onChange={handleChangeContent}
                     placeholder="Write your comment..."
                     size={TextareaSizes.MEDIUM}
-                    cols={countOfTextareaCols}
+                    cols={COUNT_OF_TEXTAREA_COLS}
                     required
                 />
             </div>

@@ -1,7 +1,7 @@
 import Button from "../Button";
 import Loading from "../Loading";
 import PostCard from "../PostCard";
-import { defaultCountOfVisiblePosts } from "@src/utils/constants";
+import { DEFAULT_COUNT_OF_VISIBLE_POSTS } from "@src/utils/constants";
 import { usePostContext } from "@src/Contexts/postsContext";
 import { ReactElement, ReactNode, useState } from "react";
 import { IPost } from "@src/domains/types";
@@ -19,7 +19,7 @@ const PostsList = ({
     const { posts } = usePostContext();
 
     const [visiblePostsCount, setVisiblePostsCount] = useState<number>(
-        defaultCountOfVisiblePosts
+        DEFAULT_COUNT_OF_VISIBLE_POSTS
     );
 
     const allPosts = posts.slice(0, visiblePostsCount);
@@ -33,9 +33,11 @@ const PostsList = ({
               const isMatchesQuery: boolean = post.title
                   .toLowerCase()
                   .includes(searchQuery.toLowerCase());
+
               const isMatchesAuthor: boolean = selectedAuthor
                   ? post.userName === selectedAuthor
                   : true;
+
               return isMatchesQuery && isMatchesAuthor;
           })
         : allPosts;
@@ -45,7 +47,7 @@ const PostsList = ({
 
     const handleLoadMore = (): void => {
         setVisiblePostsCount(
-            (prevCount) => prevCount + defaultCountOfVisiblePosts
+            (prevCount) => prevCount + DEFAULT_COUNT_OF_VISIBLE_POSTS
         );
     };
 

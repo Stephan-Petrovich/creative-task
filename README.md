@@ -1,69 +1,74 @@
-# React + TypeScript + Vite
+# Post feed
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### An application for viewing posts and comments from various users, as well as writing comments on other people's posts.
 
-Currently, two official plugins are available:
+## ✨ Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   **Large count of posts:** Shows a huge number of posts from different users.
+-   **Simple Search:** Find the publication you need by searching by the publication title and the selected author.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📖 Table of Contents
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+-   [Post feed](#post-feed)
+    -   [An application for viewing posts and comments from various users, as well as writing comments on other people's posts.](#an-application-for-viewing-posts-and-comments-from-various-users-as-well-as-writing-comments-on-other-peoples-posts)
+    -   [✨ Key Features](#-key-features)
+    -   [📖 Table of Contents](#-table-of-contents)
+    -   [🧐 About The Project](#-about-the-project)
+    -   [This web application is designed for viewing posts from various users and writing comments on them. If you need to quickly find a specific post, you can search by title or by selecting the desired author.](#this-web-application-is-designed-for-viewing-posts-from-various-users-and-writing-comments-on-them-if-you-need-to-quickly-find-a-specific-post-you-can-search-by-title-or-by-selecting-the-desired-author)
+    -   [🛠 Technologies Used](#-technologies-used)
+    -   [🚀 Getting Started](#-getting-started)
+        -   [Prerequisites](#prerequisites)
+        -   [Installation](#installation)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🧐 About The Project
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## This web application is designed for viewing posts from various users and writing comments on them. If you need to quickly find a specific post, you can search by title or by selecting the desired author.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠 Technologies Used
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+-   **Frontend:** [React](https://react.dev/)
+-   **Database:** [JSON Placeholder](https://jsonplaceholder.typicode.com/)
+-   **Styling:** CSS Modules
+
+---
+
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed on your machine:
+
+-   **[Node.js](https://nodejs.org/) (v18 or higher)** - JavaScript runtime
+-   **[npm](https://www.npmjs.com/)** - Package manager (npm comes with Node.js)
+
+### Installation
+
+1.  **Clone the repository**
+
+    ```bash
+    git clone https://github.com/Stephan-Petrovich/creative-task.git
+    cd book-store
+    ```
+
+2.  **Install dependencies**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server**
+
+    ```bash
+    npm run dev
+    ```
+
+4.  **Open your browser**
+    Navigate to [http://localhost:5173](http://localhost:5173) to view the application.
+
+---

@@ -6,6 +6,7 @@ import "./style.css";
 interface ICommentProps {
     comment: IComment;
 }
+
 const Comment = ({ comment }: ICommentProps): ReactElement => {
     return (
         <div className="comment-container">

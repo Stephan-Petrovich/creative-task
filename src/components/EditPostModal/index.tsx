@@ -1,15 +1,16 @@
+import Button from "../Button";
 import TextArea, { TextareaSizes } from "../Textarea";
 import Input, { TypesOfInput, InputSizes } from "../Input";
-import { usePostContext } from "@src/Contexts/postsContext";
+
 import {
     capitalizeFirstLetter,
-    countOfTextareaCols,
+    COUNT_OF_TEXTAREA_COLS,
 } from "@src/utils/constants";
+import { usePostContext } from "@src/Contexts/postsContext";
 import { FormEvent, ReactElement, useState } from "react";
 import { deletePost, updatePost } from "@src/api";
 import { useNavigate } from "react-router-dom";
 import { IPost } from "@src/domains/types";
-import Button from "../Button";
 import "./style.css";
 
 interface IEditPostModalProps {
@@ -52,7 +53,9 @@ const EditPostModal = ({
 
         try {
             const updatedPost = await updatePost(post.id, { title, body });
+
             onUpdatePost(updatedPost);
+
             onClose(false);
         } catch (error) {
             console.error("Failed update post");
@@ -70,9 +73,12 @@ const EditPostModal = ({
 
         try {
             await deletePost(post.id);
+
             removePost(post.id);
-            navigate("/posts");
+
             onClose(false);
+
+            navigate("/posts");
         } catch (error) {
             console.error("Delete post error:", error);
         } finally {
@@ -103,7 +109,7 @@ const EditPostModal = ({
                         value={body}
                         onChange={handleChangeBody}
                         size={TextareaSizes.MEDIUM}
-                        cols={countOfTextareaCols}
+                        cols={COUNT_OF_TEXTAREA_COLS}
                         required
                     />
                 </div>
