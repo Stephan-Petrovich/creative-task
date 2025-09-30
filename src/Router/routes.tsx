@@ -1,6 +1,6 @@
-import DetailPostPage from "@src/pages/DetailPostPage";
 import PostsPage from "@src/pages/PostsPage";
 import WelcomePage from "@src/pages/WelcomePage";
+import DetailPostPage from "@src/pages/DetailPostPage";
 import { RouteObject } from "react-router-dom";
 
 export const paths = {

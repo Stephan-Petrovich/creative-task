@@ -1,14 +1,14 @@
+import React, { ReactElement } from "react";
 import { capitalizeFirstLetter } from "@src/utils/constants";
 import { IPost } from "@src/domains/types";
 import { Link } from "react-router-dom";
-import { ReactElement } from "react";
 import "./style.css";
 
 interface IPostCardProps {
     post: IPost;
 }
 
-const PostCard = ({ post }: IPostCardProps): ReactElement => {
+const PostCard = React.memo(({ post }: IPostCardProps): ReactElement => {
     const shortText =
         post.body.length > 100
             ? post.body.substring(0, 100) + "..."
@@ -30,6 +30,6 @@ const PostCard = ({ post }: IPostCardProps): ReactElement => {
             </div>
         </div>
     );
-};
+});
 
 export default PostCard;

@@ -6,7 +6,7 @@ import {
     useContext,
     ReactElement,
 } from "react";
-import { shuffleArraySimple } from "@src/utils/constants";
+import { shuffleArray } from "@src/utils/constants";
 import { useUsersContext } from "../usersContext";
 import { IPost } from "@src/domains/types";
 import { fetchPosts } from "@src/api";
@@ -58,7 +58,7 @@ const PostsProvider = ({ children }: PostsProviderProps): ReactElement => {
             try {
                 const fetchedPosts = await fetchPosts();
 
-                const mixedPosts = shuffleArraySimple(fetchedPosts);
+                const mixedPosts = shuffleArray(fetchedPosts);
 
                 setOriginalPosts(mixedPosts);
             } catch (error) {

@@ -1,7 +1,7 @@
 import Button from "@src/components/Button";
 import Loading from "@src/components/Loading";
-import CommentsList from "@src/components/CommentsList";
 import EditPostModal from "@src/components/EditPostModal";
+import CommentsBlock from "@src/components/CommentsBlock";
 import FormAddComment from "@src/components/FormAddComment";
 import { ReactElement, useCallback, useEffect, useState } from "react";
 import { getPostById, getUserById, getCommentsById } from "@src/api";
@@ -95,20 +95,12 @@ const DetailPostPage = (): ReactElement => {
                 </div>
             </div>
 
-            <div className="comments-of-current-post">
-                <h3 className="comments-header">Comments on the post:</h3>
-
-                <div className="add-comment-button">
-                    <Button
-                        label="Add comment"
-                        onClick={() => {
-                            handleOpenAddForm(true);
-                        }}
-                    />
-                </div>
-
-                <CommentsList comments={currentComments} />
-            </div>
+            <CommentsBlock
+                comments={currentComments}
+                handleOpenForm={() => {
+                    handleOpenAddForm(true);
+                }}
+            />
 
             {isFormOpen && (
                 <div className="add-comment-form-container">

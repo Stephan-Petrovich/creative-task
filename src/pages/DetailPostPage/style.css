@@ -46,20 +46,6 @@
     color: #2b2c2c;
 }
 
-.comments-header {
-    text-align: center;
-}
-
-.add-comment-button {
-    text-align: center;
-}
-
-.comments-of-current-post {
-    display: flex;
-    flex-direction: column;
-    margin-left: 4rem;
-}
-
 .add-comment-form-container,
 .edit-post-form-container {
     position: fixed;

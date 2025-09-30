@@ -1,7 +1,6 @@
 import Button from "../Button";
 import TextArea, { TextareaSizes } from "../Textarea";
 import Input, { TypesOfInput, InputSizes } from "../Input";
-
 import {
     capitalizeFirstLetter,
     COUNT_OF_TEXTAREA_COLS,

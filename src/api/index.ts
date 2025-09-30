@@ -3,78 +3,80 @@ import { BASE_URL, Endpoints } from "@src/utils/constants";
 
 const fullUrlOfPosts: string = `${BASE_URL}/${Endpoints.POSTS}`;
 const fullUrlOfUsers: string = `${BASE_URL}/${Endpoints.USERS}`;
-const fullUrlOfComments: string = `${BASE_URL}/${Endpoints.COMMENTS}`;
 
-export const fetchPosts = async (): Promise<IPost[]> => {
-    const response = await fetch(fullUrlOfPosts);
+type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
-    if (!response.ok) {
-        throw new Error("Failed to fetch posts");
+export class HttpClient {
+    private async request<T>(url: string, method: HttpMethod, body?: any) {
+        const config: RequestInit = {
+            method,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        if (body) {
+            config.body = JSON.stringify(body);
+        }
+
+        const response = await fetch(url, config);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        if (method === "DELETE") {
+            return undefined as T;
+        }
+
+        const data = response.json();
+
+        return data as T;
     }
 
-    const data = await response.json();
-    return data;
+    public async get<T>(url: string): Promise<T> {
+        return this.request<T>(url, "GET");
+    }
+
+    public async post<T>(url: string, body: any): Promise<T> {
+        return this.request<T>(url, "POST", body);
+    }
+
+    public async patch<T>(url: string, body: any): Promise<T> {
+        return this.request<T>(url, "PATCH", body);
+    }
+
+    public async delete<T>(url: string): Promise<T> {
+        return this.request<T>(url, "DELETE");
+    }
+}
+
+const httpClient = new HttpClient();
+
+export const fetchPosts = async (): Promise<IPost[]> => {
+    return httpClient.get<IPost[]>(fullUrlOfPosts);
 };
 
 export const fetchUsers = async (): Promise<IUser[]> => {
-    const response = await fetch(fullUrlOfUsers);
-
-    if (!response.ok) {
-        throw new Error("Failed to fetch users");
-    }
-
-    const data = await response.json();
-
-    return data.map((user: any) => ({
-        id: user.id,
-        name: user.name,
-        username: user.username,
-        email: user.email,
-    }));
+    return httpClient.get<IUser[]>(fullUrlOfUsers);
 };
 
 export const getPostById = async (id: number): Promise<IPost> => {
     const fullUrlOfDefinitPost: string = `${fullUrlOfPosts}/${id}`;
 
-    const response = await fetch(fullUrlOfDefinitPost);
-
-    if (!response.ok) {
-        throw new Error("Failed to fetch concrete post");
-    }
-
-    const data = await response.json();
-    return data;
+    return httpClient.get<IPost>(fullUrlOfDefinitPost);
 };
 
 export const getUserById = async (id: number): Promise<IUser> => {
     const fullUrlOfDefinitUser: string = `${fullUrlOfUsers}/${id}`;
 
-    const response = await fetch(fullUrlOfDefinitUser);
-
-    if (!response.ok) {
-        throw new Error("Failed to load concrete user");
-    }
-
-    const data = await response.json();
-    return {
-        id: data.id,
-        name: data.name,
-        username: data.username,
-        email: data.email,
-    };
+    return httpClient.get<IUser>(fullUrlOfDefinitUser);
 };
 
 export const getCommentsById = async (id: number): Promise<IComment[]> => {
     const fullUrlOfDefinitPostComments: string = `${fullUrlOfPosts}/${id}/${Endpoints.COMMENTS}`;
 
-    const response = await fetch(fullUrlOfDefinitPostComments);
-
-    if (!response.ok) {
-        throw new Error("Failed to load concrete comments");
-    }
-
-    const data = await response.json();
-    return data;
+    return httpClient.get<IComment[]>(fullUrlOfDefinitPostComments);
 };
 
 export const addNewComment = async (
@@ -83,25 +85,13 @@ export const addNewComment = async (
     email: string,
     body: string
 ) => {
-    const response = await fetch(fullUrlOfComments, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            postId,
-            name: name.trim(),
-            email: email.trim(),
-            body: body.trim(),
-        }),
+    const fullUrlOfPostComments: string = `${fullUrlOfPosts}/${postId}/${Endpoints.COMMENTS}`;
+
+    return httpClient.post<IComment>(fullUrlOfPostComments, {
+        name,
+        email,
+        body,
     });
-
-    if (!response.ok) {
-        throw new Error("Failed to add comment");
-    }
-
-    const data = response.json();
-    return data;
 };
 
 export const updatePost = async (
@@ -110,30 +100,11 @@ export const updatePost = async (
 ): Promise<IPost> => {
     const fullUrlOfDefinitePost: string = `${fullUrlOfPosts}/${id}`;
 
-    const response = await fetch(fullUrlOfDefinitePost, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(postData),
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to update post");
-    }
-
-    const data = response.json();
-    return data;
+    return httpClient.patch<IPost>(fullUrlOfDefinitePost, postData);
 };
 
 export const deletePost = async (id: number) => {
     const fullUrlOfDefinitePost: string = `${fullUrlOfPosts}/${id}`;
 
-    const response = await fetch(fullUrlOfDefinitePost, {
-        method: "DELETE",
-    });
-
-    if (!response.ok) {
-        throw new Error("Failed to delete post");
-    }
+    return httpClient.delete<void>(fullUrlOfDefinitePost);
 };

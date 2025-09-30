@@ -27,7 +27,7 @@ const FilteredPostsList = ({
     const { visiblePosts, handleLoadMore, isCanContinueList } =
         usePagination(filteredPosts);
 
-    const isEmptyResults: boolean = filteredPosts.length === 0;
+    const isEmptyResults: boolean = visiblePosts.length === 0;
 
     if (isEmptyResults) {
         return (
@@ -54,7 +54,7 @@ const FilteredPostsList = ({
                     <Button label="Show more" onClick={handleLoadMore} />
                 </div>
             ) : (
-                <div className="end-of-list">You have viewed all posts</div>
+                <div className="end-of-list">That's all</div>
             )}
         </div>
     );
