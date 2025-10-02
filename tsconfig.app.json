@@ -21,7 +21,7 @@
             "@components/*": ["./src/components/*"],
             "@domains/*": ["./src/domains/*"],
             "@utils/*": ["./src/utils/*"],
-            "@Router/*": ["src/router/*"]
+            "@Router/*": ["./src/router/*"]
         },
 
         /* Bundler mode */

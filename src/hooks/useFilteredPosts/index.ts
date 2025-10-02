@@ -3,10 +3,10 @@ import { IPost } from "@src/domains/types";
 const useFilteredPosts = (
     posts: IPost[],
     searchQuery: string,
-    selectedAuthor: string | null
+    selectedOptionLabel: string | null
 ) => {
     const noActiveFilters: boolean =
-        searchQuery.length === 0 && selectedAuthor === null;
+        searchQuery.length === 0 && selectedOptionLabel === null;
 
     if (noActiveFilters) {
         return { filteredPosts: posts };
@@ -19,7 +19,9 @@ const useFilteredPosts = (
                 : post.title.toLowerCase().includes(searchQuery.toLowerCase());
 
         const matchesAuthor =
-            selectedAuthor === null ? true : post.userName === selectedAuthor;
+            selectedOptionLabel === null
+                ? true
+                : post.userName === selectedOptionLabel;
 
         return matchesSearch && matchesAuthor;
     });

@@ -2,8 +2,9 @@ import Error from "../Error";
 import Button from "../Button";
 import TextArea, { TextareaSizes } from "../Textarea";
 import Input, { InputSizes, TypesOfInput } from "../Input";
+import { FormEvent, ReactElement, useEffect, useState } from "react";
 import { COUNT_OF_TEXTAREA_COLS } from "@src/utils/constants";
-import { FormEvent, ReactElement, useState } from "react";
+import { validateEmail } from "@src/utils/validations";
 import { IComment } from "@src/domains/types";
 import { addNewComment } from "@src/api";
 import "./style.css";
@@ -23,12 +24,12 @@ const FormAddComment = ({
     const [email, setEmail] = useState<string>("");
     const [content, setContent] = useState<string>("");
 
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
-    const textOfSubmitButton: string = isSubmitting
-        ? "Loading..."
-        : "Add comment";
+    const isSubmitDisabled: boolean = !isEmailValid;
+
+    const textOfSubmitButton: string = "Add comment";
 
     const textOfOpenButton: string = "Cancel the operation";
 
@@ -46,8 +47,6 @@ const FormAddComment = ({
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
-
-        setIsSubmitting(true);
 
         try {
             const newComment: IComment = await addNewComment(
@@ -67,8 +66,6 @@ const FormAddComment = ({
 
             console.error("Add comment error:", error);
         } finally {
-            setIsSubmitting(false);
-
             handleClose(false);
         }
     };
@@ -76,6 +73,12 @@ const FormAddComment = ({
     const handleCloseForm = (): void => {
         handleClose(false);
     };
+
+    useEffect(() => {
+        const validation = validateEmail(email);
+
+        setIsEmailValid(validation);
+    }, [email]);
 
     return (
         <form className="add-comment-form" onSubmit={handleSubmit}>
@@ -122,7 +125,7 @@ const FormAddComment = ({
                 <Button
                     type="submit"
                     label={textOfSubmitButton}
-                    disabled={isSubmitting}
+                    disabled={isSubmitDisabled}
                 />
             </div>
 

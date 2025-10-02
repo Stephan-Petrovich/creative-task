@@ -1,14 +1,29 @@
+import Error from "@src/components/Error";
+import Loading from "@src/components/Loading";
 import useDebounce from "@src/hooks/useDebounce";
 import FilteredPostsList from "@src/components/FilteredPostsList";
 import Input, { InputSizes, TypesOfInput } from "@src/components/Input";
 import Select, { ISelectOption, SelectSizes } from "@src/components/Select";
-import { INPUT_RESPONSE_TIMER, INPUT_STYLES } from "@src/utils/constants";
+import {
+    INPUT_RESPONSE_TIMER,
+    INPUT_STYLES,
+    SELECT_STYLES,
+} from "@src/utils/constants";
 import { useUsersContext } from "@src/Contexts/usersContext";
 import { ReactElement, useCallback, useState } from "react";
 import "./style.css";
 
 const PostsPage = (): ReactElement => {
-    const { users } = useUsersContext();
+    const { users, isLoading, error } = useUsersContext();
+
+    //TODO Протестировать работу состояния isLoading и error контекста users
+    if (error) {
+        <Error label="Failed to load users. Please check your internet connection." />;
+    }
+
+    if (isLoading) {
+        <Loading />;
+    }
 
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [debouncedSearchQuery, setDebouncedSearchQuery] =
@@ -18,13 +33,20 @@ const PostsPage = (): ReactElement => {
         null
     );
 
-    const selectOptions: ISelectOption[] =
-        users.map((user) => {
+    const selectedOptionLabel =
+        selectedOption && selectedOption.value !== null
+            ? String(selectedOption.label)
+            : null;
+
+    const selectOptions: ISelectOption[] = [
+        { value: null, label: "Without specific author" },
+        ...(users.map((user) => {
             return {
                 value: user.id,
                 label: user.username,
             };
-        }) || [];
+        }) || []),
+    ];
 
     const debouncedSetSearch = useDebounce((query: string) => {
         setDebouncedSearchQuery(query);
@@ -46,11 +68,7 @@ const PostsPage = (): ReactElement => {
                 <div className="posts-page-list-container">
                     <FilteredPostsList
                         searchQuery={debouncedSearchQuery}
-                        selectedAuthor={
-                            selectedOption?.label
-                                ? String(selectedOption.label)
-                                : null
-                        }
+                        selectedOptionLabel={selectedOptionLabel}
                     />
                 </div>
                 <div className="page-list-redactor">
@@ -68,6 +86,7 @@ const PostsPage = (): ReactElement => {
                         onChange={handleSelectOption}
                         placeholder="Select a filter by author"
                         size={SelectSizes.LARGE}
+                        style={SELECT_STYLES}
                     />
                 </div>
             </div>

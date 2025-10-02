@@ -12,7 +12,7 @@
     font-weight: 400;
     padding: 1.25rem;
     border-radius: 0.3125rem;
-    background-color: rgba(216, 139, 133, 0.219);
-    border: 1px solid rgb(218, 76, 66);
-    color: gray;
+    background-color: var(--error-background-color);
+    border: 1px solid var(--error-border-color);
+    color: var(--border-color);
 }

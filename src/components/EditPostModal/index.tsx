@@ -1,10 +1,8 @@
 import Button from "../Button";
 import TextArea, { TextareaSizes } from "../Textarea";
 import Input, { TypesOfInput, InputSizes } from "../Input";
-import {
-    capitalizeFirstLetter,
-    COUNT_OF_TEXTAREA_COLS,
-} from "@src/utils/constants";
+import { COUNT_OF_TEXTAREA_COLS } from "@src/utils/constants";
+import { capitalizeFirstLetter } from "@src/utils/functions";
 import { usePostContext } from "@src/Contexts/postsContext";
 import { FormEvent, ReactElement, useState } from "react";
 import { deletePost, updatePost } from "@src/api";

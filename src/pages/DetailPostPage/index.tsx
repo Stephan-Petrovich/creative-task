@@ -5,29 +5,32 @@ import CommentsBlock from "@src/components/CommentsBlock";
 import FormAddComment from "@src/components/FormAddComment";
 import { ReactElement, useCallback, useEffect, useState } from "react";
 import { getPostById, getUserById, getCommentsById } from "@src/api";
-import { capitalizeFirstLetter } from "@src/utils/constants";
+import { capitalizeFirstLetter } from "@src/utils/functions";
 import { IComment, IPost, IUser } from "@src/domains/types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./style.css";
 
 const DetailPostPage = (): ReactElement => {
+    const navigate = useNavigate();
+
     const [currentPost, setCurrentPost] = useState<IPost | null>(null);
     const [currentUser, setCurrentUser] = useState<IUser | null>(null);
     const [currentComments, setCurrentComments] = useState<IComment[]>([]);
 
-    const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+    const [isAddCommentFormOpen, setIsAddCommentFormOpen] =
+        useState<boolean>(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
 
     const { id } = useParams<{ id: string }>();
     const postId = parseInt(id || "");
 
-    const handleOpenAddForm = useCallback((isOpen: boolean) => {
-        setIsFormOpen(isOpen);
-    }, []);
+    const handleOpenAddForm = (isOpen: boolean) => {
+        setIsAddCommentFormOpen(isOpen);
+    };
 
-    const handleOpenEditModal = useCallback((isOpen: boolean) => {
+    const handleOpenEditModal = (isOpen: boolean) => {
         setIsEditModalOpen(isOpen);
-    }, []);
+    };
 
     const handleCreateComment = useCallback((newComment: IComment): void => {
         setCurrentComments((prevComments) => {
@@ -75,6 +78,13 @@ const DetailPostPage = (): ReactElement => {
 
     return (
         <div className="detail-post-page">
+            <div className="return-to-posts-button-container">
+                <Button
+                    label="Return to posts"
+                    onClick={() => navigate("/posts")}
+                />
+            </div>
+
             <div className="current-post-container">
                 <h1 className="current-post-author">{`User: ${currentUser.username}`}</h1>
                 <h2 className="current-post-title">
@@ -102,7 +112,7 @@ const DetailPostPage = (): ReactElement => {
                 }}
             />
 
-            {isFormOpen && (
+            {isAddCommentFormOpen && (
                 <div className="add-comment-form-container">
                     <div className="add-comment-form-wrapper">
                         <FormAddComment

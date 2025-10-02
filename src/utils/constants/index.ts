@@ -12,20 +12,14 @@ export enum Endpoints {
     COMMENTS = "comments",
 }
 
-export const capitalizeFirstLetter = (text: string): string => {
-    if (!text) {
-        return text;
-    }
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-};
-
-export const shuffleArray = <T>(array: T[]): T[] => {
-    return [...array].sort(() => Math.random() - 0.5);
-};
-
 export const INPUT_STYLES = {
     width: "100%",
     maxWidth: "42.5rem",
     minWidth: "300px",
     margin: "0 auto",
+};
+
+export const SELECT_STYLES = {
+    width: "100%",
+    minWidth: "12rem",
 };

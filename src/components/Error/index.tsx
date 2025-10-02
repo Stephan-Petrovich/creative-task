@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import "./style.css";
 
 interface IErrorProps {
-    label: string;
+    label?: string;
 }
 
 const DEFAULT_VALUE_LABEL: string =

@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { capitalizeFirstLetter } from "@src/utils/constants";
+import { capitalizeFirstLetter } from "@src/utils/functions";
 import { IPost } from "@src/domains/types";
 import { Link } from "react-router-dom";
 import "./style.css";

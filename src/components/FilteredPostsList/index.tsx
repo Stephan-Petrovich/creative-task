@@ -1,3 +1,4 @@
+import Error from "../Error";
 import Button from "../Button";
 import Loading from "../Loading";
 import PostCard from "../PostCard";
@@ -9,19 +10,33 @@ import "./style.css";
 
 interface IPostsListProps {
     searchQuery: string;
-    selectedAuthor: string | null;
+    selectedOptionLabel: string | null;
 }
 
 const FilteredPostsList = ({
     searchQuery,
-    selectedAuthor,
+    selectedOptionLabel,
 }: IPostsListProps): ReactElement => {
-    const { posts } = usePostContext();
+    const { posts, isLoading, error } = usePostContext();
+
+    if (error) {
+        return (
+            <Error label="Failed to load posts. Please check your internet connection." />
+        );
+    }
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    if (!posts || posts.length === 0) {
+        return <Error label="No posts available. Please try again later." />;
+    }
 
     const { filteredPosts } = useFilteredPosts(
         posts,
         searchQuery,
-        selectedAuthor
+        selectedOptionLabel
     );
 
     const { visiblePosts, handleLoadMore, isCanContinueList } =
@@ -35,10 +50,6 @@ const FilteredPostsList = ({
                 No entry matching the entered title was found.
             </div>
         );
-    }
-
-    if (!posts) {
-        return <Loading />;
     }
 
     return (

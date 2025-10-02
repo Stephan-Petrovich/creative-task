@@ -11,14 +11,14 @@
 .end-of-list {
     text-align: center;
     padding: 1.5rem;
-    color: #666;
+    color: var(--secondary-text-color);
 }
 
 .empty-list-message {
     padding: 0.5rem;
     color: #333333;
     margin-bottom: 0.5rem;
-    background-color: #ffffff;
+    background-color: var(--light-background-color);
     border: 0.075rem solid #999;
 
     border-radius: 0.5rem;

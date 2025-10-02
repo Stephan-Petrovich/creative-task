@@ -11,16 +11,16 @@
 
 ## 📖 Table of Contents
 
--   [Post feed](#post-feed)
-    -   [An application for viewing posts and comments from various users, as well as writing comments on other people's posts.](#an-application-for-viewing-posts-and-comments-from-various-users-as-well-as-writing-comments-on-other-peoples-posts)
-    -   [✨ Key Features](#-key-features)
-    -   [📖 Table of Contents](#-table-of-contents)
-    -   [🧐 About The Project](#-about-the-project)
-    -   [This web application is designed for viewing posts from various users and writing comments on them. If you need to quickly find a specific post, you can search by title or by selecting the desired author.](#this-web-application-is-designed-for-viewing-posts-from-various-users-and-writing-comments-on-them-if-you-need-to-quickly-find-a-specific-post-you-can-search-by-title-or-by-selecting-the-desired-author)
-    -   [🛠 Technologies Used](#-technologies-used)
-    -   [🚀 Getting Started](#-getting-started)
-        -   [Prerequisites](#prerequisites)
-        -   [Installation](#installation)
+- [Post feed](#post-feed)
+    - [An application for viewing posts and comments from various users, as well as writing comments on other people's posts.](#an-application-for-viewing-posts-and-comments-from-various-users-as-well-as-writing-comments-on-other-peoples-posts)
+  - [✨ Key Features](#-key-features)
+  - [📖 Table of Contents](#-table-of-contents)
+  - [🧐 About The Project](#-about-the-project)
+  - [This web application is designed for viewing posts from various users and writing comments on them. If you need to quickly find a specific post, you can search by title or by selecting the desired author.](#this-web-application-is-designed-for-viewing-posts-from-various-users-and-writing-comments-on-them-if-you-need-to-quickly-find-a-specific-post-you-can-search-by-title-or-by-selecting-the-desired-author)
+  - [🛠 Technologies Used](#-technologies-used)
+  - [🚀 Getting Started](#-getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
 
 ---
 
@@ -62,13 +62,19 @@ Before you begin, ensure you have the following installed on your machine:
     npm install
     ```
 
-3.  **Run the development server**
+3.  **Go to the development branch**
+
+    ```bash
+    git checkout development
+    ```
+
+4.  **Run the development server**
 
     ```bash
     npm run dev
     ```
 
-4.  **Open your browser**
+5.  **Open your browser**
     Navigate to [http://localhost:5173](http://localhost:5173) to view the application.
 
 ---

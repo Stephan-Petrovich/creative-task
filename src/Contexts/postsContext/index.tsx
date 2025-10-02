@@ -6,7 +6,7 @@ import {
     useContext,
     ReactElement,
 } from "react";
-import { shuffleArray } from "@src/utils/constants";
+import { shuffleArray } from "@src/utils/functions";
 import { useUsersContext } from "../usersContext";
 import { IPost } from "@src/domains/types";
 import { fetchPosts } from "@src/api";
@@ -14,6 +14,8 @@ import { fetchPosts } from "@src/api";
 interface IPostContext {
     posts: IPost[];
     removePost: (postId: number) => void;
+    isLoading: boolean;
+    error: string | null;
 }
 
 interface PostsProviderProps {
@@ -23,12 +25,17 @@ interface PostsProviderProps {
 const PostsContext = createContext<IPostContext>({
     posts: [],
     removePost: () => {},
+    isLoading: false,
+    error: null,
 });
 
 const PostsProvider = ({ children }: PostsProviderProps): ReactElement => {
     const { usersMap } = useUsersContext();
 
     const [originalPosts, setOriginalPosts] = useState<IPost[]>([]);
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
     const getPostsWithAuthor = (
         posts: IPost[],
@@ -56,13 +63,18 @@ const PostsProvider = ({ children }: PostsProviderProps): ReactElement => {
     useEffect(() => {
         const loadPosts = async () => {
             try {
+                setIsLoading(true);
+
                 const fetchedPosts = await fetchPosts();
 
                 const mixedPosts = shuffleArray(fetchedPosts);
 
                 setOriginalPosts(mixedPosts);
             } catch (error) {
+                setError("Ошибка загрузки постов");
                 console.error("Ошибка загрузки постов:", error);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -70,7 +82,9 @@ const PostsProvider = ({ children }: PostsProviderProps): ReactElement => {
     }, []);
 
     return (
-        <PostsContext.Provider value={{ posts: postsWithAuthor, removePost }}>
+        <PostsContext.Provider
+            value={{ posts: postsWithAuthor, removePost, isLoading, error }}
+        >
             {children}
         </PostsContext.Provider>
     );
@@ -79,7 +93,7 @@ const PostsProvider = ({ children }: PostsProviderProps): ReactElement => {
 const usePostContext = () => {
     const context = useContext(PostsContext);
 
-    if (context === null) {
+    if (context === undefined) {
         throw new Error("usePostContext must be used within a PostsProvider");
     }
 

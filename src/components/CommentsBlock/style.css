@@ -1,7 +1,6 @@
 .comments-of-current-post {
     display: flex;
     flex-direction: column;
-    margin-left: 4rem;
 }
 
 .comments-header {
