@@ -11,16 +11,16 @@
 
 ## 📖 Table of Contents
 
-- [Post feed](#post-feed)
-    - [An application for viewing posts and comments from various users, as well as writing comments on other people's posts.](#an-application-for-viewing-posts-and-comments-from-various-users-as-well-as-writing-comments-on-other-peoples-posts)
-  - [✨ Key Features](#-key-features)
-  - [📖 Table of Contents](#-table-of-contents)
-  - [🧐 About The Project](#-about-the-project)
-  - [This web application is designed for viewing posts from various users and writing comments on them. If you need to quickly find a specific post, you can search by title or by selecting the desired author.](#this-web-application-is-designed-for-viewing-posts-from-various-users-and-writing-comments-on-them-if-you-need-to-quickly-find-a-specific-post-you-can-search-by-title-or-by-selecting-the-desired-author)
-  - [🛠 Technologies Used](#-technologies-used)
-  - [🚀 Getting Started](#-getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
+-   [Post feed](#post-feed)
+    -   [An application for viewing posts and comments from various users, as well as writing comments on other people's posts.](#an-application-for-viewing-posts-and-comments-from-various-users-as-well-as-writing-comments-on-other-peoples-posts)
+    -   [✨ Key Features](#-key-features)
+    -   [📖 Table of Contents](#-table-of-contents)
+    -   [🧐 About The Project](#-about-the-project)
+    -   [This web application is designed for viewing posts from various users and writing comments on them. If you need to quickly find a specific post, you can search by title or by selecting the desired author.](#this-web-application-is-designed-for-viewing-posts-from-various-users-and-writing-comments-on-them-if-you-need-to-quickly-find-a-specific-post-you-can-search-by-title-or-by-selecting-the-desired-author)
+    -   [🛠 Technologies Used](#-technologies-used)
+    -   [🚀 Getting Started](#-getting-started)
+        -   [Prerequisites](#prerequisites)
+        -   [Installation](#installation)
 
 ---
 
@@ -30,7 +30,7 @@
 
 ## 🛠 Technologies Used
 
--   **Frontend:** [React](https://react.dev/)
+-   **Frontend:** [React](https://react.dev/), TypeScript
 -   **Database:** [JSON Placeholder](https://jsonplaceholder.typicode.com/)
 -   **Styling:** CSS Modules
 

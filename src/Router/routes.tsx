@@ -1,7 +1,18 @@
 import PostsPage from "@src/pages/PostsPage";
 import WelcomePage from "@src/pages/WelcomePage";
 import DetailPostPage from "@src/pages/DetailPostPage";
+import { UsersProvider } from "@src/Contexts/usersContext";
+import { PostsProvider } from "@src/Contexts/postsContext";
+import { ReactElement, ReactNode } from "react";
 import { RouteObject } from "react-router-dom";
+
+const Providers = ({ children }: { children: ReactNode }): ReactElement => {
+    return (
+        <UsersProvider>
+            <PostsProvider>{children}</PostsProvider>
+        </UsersProvider>
+    );
+};
 
 export const paths = {
     WELCOMEPAGE: {
@@ -25,9 +36,20 @@ const routes: RouteObject[] = [
     },
     {
         ...paths.POSTSPAGE,
-        element: <PostsPage />,
+        element: (
+            <Providers>
+                <PostsPage />
+            </Providers>
+        ),
     },
-    { ...paths.DETAILPOSTPAGE, element: <DetailPostPage /> },
+    {
+        ...paths.DETAILPOSTPAGE,
+        element: (
+            <Providers>
+                <DetailPostPage />
+            </Providers>
+        ),
+    },
 ];
 
 export default routes;

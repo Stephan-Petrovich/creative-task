@@ -1,13 +1,12 @@
 import { IPost, IUser, IComment } from "@src/domains/types";
 import { BASE_URL, Endpoints } from "@src/utils/constants";
 
-const fullUrlOfPosts: string = `${BASE_URL}/${Endpoints.POSTS}`;
-const fullUrlOfUsers: string = `${BASE_URL}/${Endpoints.USERS}`;
-
 type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 export class HttpClient {
     private async request<T>(url: string, method: HttpMethod, body?: any) {
+        const fullUrlOfRequest: string = `${BASE_URL}/${url}`;
+
         const config: RequestInit = {
             method,
             headers: {
@@ -19,7 +18,7 @@ export class HttpClient {
             config.body = JSON.stringify(body);
         }
 
-        const response = await fetch(url, config);
+        const response = await fetch(fullUrlOfRequest, config);
 
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -54,29 +53,29 @@ export class HttpClient {
 const httpClient = new HttpClient();
 
 export const fetchPosts = async (): Promise<IPost[]> => {
-    return httpClient.get<IPost[]>(fullUrlOfPosts);
+    return httpClient.get<IPost[]>(Endpoints.POSTS);
 };
 
 export const fetchUsers = async (): Promise<IUser[]> => {
-    return httpClient.get<IUser[]>(fullUrlOfUsers);
+    return httpClient.get<IUser[]>(Endpoints.USERS);
 };
 
 export const getPostById = async (id: number): Promise<IPost> => {
-    const fullUrlOfDefinitPost: string = `${fullUrlOfPosts}/${id}`;
+    const urlOfDefinitPost: string = `${Endpoints.POSTS}/${id}`;
 
-    return httpClient.get<IPost>(fullUrlOfDefinitPost);
+    return httpClient.get<IPost>(urlOfDefinitPost);
 };
 
 export const getUserById = async (id: number): Promise<IUser> => {
-    const fullUrlOfDefinitUser: string = `${fullUrlOfUsers}/${id}`;
+    const urlOfDefinitUser: string = `${Endpoints.USERS}/${id}`;
 
-    return httpClient.get<IUser>(fullUrlOfDefinitUser);
+    return httpClient.get<IUser>(urlOfDefinitUser);
 };
 
 export const getCommentsById = async (id: number): Promise<IComment[]> => {
-    const fullUrlOfDefinitPostComments: string = `${fullUrlOfPosts}/${id}/${Endpoints.COMMENTS}`;
+    const urlOfDefinitPostComments: string = `${Endpoints.POSTS}/${id}/${Endpoints.COMMENTS}`;
 
-    return httpClient.get<IComment[]>(fullUrlOfDefinitPostComments);
+    return httpClient.get<IComment[]>(urlOfDefinitPostComments);
 };
 
 export const addNewComment = async (
@@ -85,9 +84,9 @@ export const addNewComment = async (
     email: string,
     body: string
 ) => {
-    const fullUrlOfPostComments: string = `${fullUrlOfPosts}/${postId}/${Endpoints.COMMENTS}`;
+    const urlOfPostComments: string = `${Endpoints.POSTS}/${postId}/${Endpoints.COMMENTS}`;
 
-    return httpClient.post<IComment>(fullUrlOfPostComments, {
+    return httpClient.post<IComment>(urlOfPostComments, {
         name,
         email,
         body,
@@ -98,13 +97,13 @@ export const updatePost = async (
     id: number,
     postData: { title: string; body: string }
 ): Promise<IPost> => {
-    const fullUrlOfDefinitePost: string = `${fullUrlOfPosts}/${id}`;
+    const urlOfDefinitePost: string = `${Endpoints.POSTS}/${id}`;
 
-    return httpClient.patch<IPost>(fullUrlOfDefinitePost, postData);
+    return httpClient.patch<IPost>(urlOfDefinitePost, postData);
 };
 
 export const deletePost = async (id: number) => {
-    const fullUrlOfDefinitePost: string = `${fullUrlOfPosts}/${id}`;
+    const urlOfDefinitePost: string = `${Endpoints.POSTS}/${id}`;
 
-    return httpClient.delete<void>(fullUrlOfDefinitePost);
+    return httpClient.delete<void>(urlOfDefinitePost);
 };

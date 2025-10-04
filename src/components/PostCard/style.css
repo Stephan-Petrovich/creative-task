@@ -1,9 +1,9 @@
 .post-card {
     padding: 0.3125rem;
-    border: 0.0625rem solid #ccc;
+    border: 0.0625rem solid var(--border-color);
     border-radius: 0.5rem;
-    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    box-shadow: 0 0.125rem 0.5rem var(--dark-box-shadow);
+    background-color: var(--primary-background-color);
     margin-bottom: 1rem;
     max-width: 37.5rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -12,7 +12,7 @@
 
 .post-card:hover {
     transform: translateY(-0.125rem);
-    box-shadow: 0 0.25rem 0.75rem rgba(100, 101, 102, 0.25);
+    box-shadow: 0 0.25rem 0.75rem var(--default-box-shadow);
 }
 
 .post-header {
@@ -30,7 +30,7 @@
     margin: 0 0 1rem 0;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #2b2c2c;
+    color: var(--primary-text-color);
     line-height: 1.3;
 }
 
@@ -38,7 +38,7 @@
     margin-bottom: 1.5rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #2b2c2c;
+    color: var(--primary-text-color);
 }
 
 .post-link {
@@ -47,19 +47,19 @@
 }
 
 .post-link a {
-    color: #000000;
+    color: var(--dark-text-color);
     text-decoration: none;
     font-weight: 600;
     padding: 0.5rem 1rem;
-    border: 0.125rem solid #ccc;
+    border: 0.125rem solid var(--border-color);
     border-radius: 0.25rem;
-    background-color: #f8f9fa;
+    background-color: var(--primary-background-color);
     transition: all 0.2s ease;
     display: inline-block;
 }
 
 .post-link a:hover {
-    border-color: #959aa0;
-    background-color: #999999;
-    color: #ffffff;
+    border-color: var(--grey-border-color);
+    background-color: var(--border-color);
+    color: var(--primary-background-color);
 }

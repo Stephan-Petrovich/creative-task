@@ -4,21 +4,21 @@
     border-radius: 0.25rem;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
-    color: #333333;
+    color: var(--primary-text-color);
 }
 
 .input:focus {
     outline: none;
-    border-color: #999;
+    border-color: var(--grey-border-color);
 }
 
 .input:hover {
-    background-color: #f5f5f5;
+    background-color: var(--primary-background-color);
 }
 
 .input:disabled {
-    background-color: #f5f5f5;
-    color: #999;
+    background-color: var(--primary-background-color);
+    color: var(--grey-border-color);
     cursor: not-allowed;
 }
 

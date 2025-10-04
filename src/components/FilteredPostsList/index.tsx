@@ -1,38 +1,22 @@
-import Error from "../Error";
 import Button from "../Button";
-import Loading from "../Loading";
 import PostCard from "../PostCard";
 import usePagination from "@src/hooks/usePagination";
 import useFilteredPosts from "@src/hooks/useFilteredPosts";
-import { usePostContext } from "@src/Contexts/postsContext";
+import { IPost } from "@src/domains/types";
 import { ReactElement } from "react";
 import "./style.css";
 
 interface IPostsListProps {
+    posts: IPost[];
     searchQuery: string;
     selectedOptionLabel: string | null;
 }
 
 const FilteredPostsList = ({
+    posts,
     searchQuery,
     selectedOptionLabel,
 }: IPostsListProps): ReactElement => {
-    const { posts, isLoading, error } = usePostContext();
-
-    if (error) {
-        return (
-            <Error label="Failed to load posts. Please check your internet connection." />
-        );
-    }
-
-    if (isLoading) {
-        return <Loading />;
-    }
-
-    if (!posts || posts.length === 0) {
-        return <Error label="No posts available. Please try again later." />;
-    }
-
     const { filteredPosts } = useFilteredPosts(
         posts,
         searchQuery,

@@ -11,10 +11,10 @@
     align-items: flex-start;
     margin-top: 0.3rem;
     margin-left: 0.5rem;
-    border: 0.075rem solid #ccc;
+    border: 0.075rem solid var(--border-color);
     border-radius: 0.25rem;
-    background-color: #fff;
-    box-shadow: 0 0.3rem 0.25rem rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-background-color);
+    box-shadow: 0 0.3rem 0.25rem var(--default-box-shadow);
     font-family: "Times New Roman", Times, serif;
     transition: transform 0.2s ease;
     width: 51rem;
@@ -28,28 +28,28 @@
 
 .current-post-container:hover {
     transform: translateY(-0.125rem);
-    box-shadow: 0 0.3rem 0.15rem rgba(100, 101, 102, 0.25);
+    box-shadow: 0 0.3rem 0.15rem var(--default-box-shadow);
 }
 
 .current-post-author {
     margin: 0.625rem 0 0.625rem 0.625rem;
     font-weight: 400;
     font-size: 2rem;
-    color: #222222;
+    color: var(--primary-text-color);
 }
 
 .current-post-title {
     margin: 0 0 0 0.625rem;
     font-weight: 600;
     font-size: 1.3rem;
-    color: #2b2c2c;
+    color: var(--primary-text-color);
 }
 
 .current-post-body {
     margin: 0 0.625rem 0 0.625rem;
     font-weight: 400;
     font-size: 1.2rem;
-    color: #2b2c2c;
+    color: var(--primary-text-color);
 }
 
 .add-comment-form-container,
@@ -59,7 +59,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--darkened-background-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,11 +67,11 @@
 
 .add-comment-form-wrapper,
 .edit-post-form-wrapper {
-    background: white;
+    background: var(--primary-background-color);
     border-radius: 0.75rem;
     max-width: 43rem;
     width: 100%;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1rem 3rem var(--darkened-background-color);
 }
 
 .edit-post-button-container {

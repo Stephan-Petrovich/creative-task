@@ -14,8 +14,8 @@ import { fetchPosts } from "@src/api";
 interface IPostContext {
     posts: IPost[];
     removePost: (postId: number) => void;
-    isLoading: boolean;
-    error: string | null;
+    isPostsLoading: boolean;
+    errorLoadingPosts: string | null;
 }
 
 interface PostsProviderProps {
@@ -25,8 +25,8 @@ interface PostsProviderProps {
 const PostsContext = createContext<IPostContext>({
     posts: [],
     removePost: () => {},
-    isLoading: false,
-    error: null,
+    isPostsLoading: false,
+    errorLoadingPosts: null,
 });
 
 const PostsProvider = ({ children }: PostsProviderProps): ReactElement => {
@@ -83,7 +83,12 @@ const PostsProvider = ({ children }: PostsProviderProps): ReactElement => {
 
     return (
         <PostsContext.Provider
-            value={{ posts: postsWithAuthor, removePost, isLoading, error }}
+            value={{
+                posts: postsWithAuthor,
+                removePost,
+                isPostsLoading: isLoading,
+                errorLoadingPosts: error,
+            }}
         >
             {children}
         </PostsContext.Provider>

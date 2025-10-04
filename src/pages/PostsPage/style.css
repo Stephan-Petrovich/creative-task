@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(#f5f7fa 0%, #c3cfe2 100%);
+    background: var(--default-background-color);
     width: 100%;
     min-height: 100vh;
 }
@@ -14,11 +14,11 @@
     font-weight: 550;
     padding: 0.25rem;
     margin: 0.75rem 0 0.3rem 0;
-    border: 0.075rem solid #ccc;
-    background-color: #fff;
+    border: 0.075rem solid var(--border-color);
+    background-color: var(--primary-background-color);
     border-radius: 0.5rem;
     max-width: 25rem;
-    color: #2c3e50;
+    color: var(--title-text-color);
     width: 100%;
     text-align: center;
     cursor: default;

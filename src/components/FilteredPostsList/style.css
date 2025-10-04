@@ -16,10 +16,10 @@
 
 .empty-list-message {
     padding: 0.5rem;
-    color: #333333;
+    color: var(--primary-text-color);
     margin-bottom: 0.5rem;
-    background-color: var(--light-background-color);
-    border: 0.075rem solid #999;
+    background-color: var(--primary-background-color);
+    border: 0.075rem solid var(--grey-border-color);
 
     border-radius: 0.5rem;
     cursor: default;

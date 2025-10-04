@@ -12,8 +12,8 @@ import { fetchUsers } from "@src/api";
 interface IUsersContext {
     users: IUser[];
     usersMap: Map<number, string> | null;
-    isLoading: boolean;
-    error: string | null;
+    isUsersLoading: boolean;
+    errorLoadingUsers: string | null;
 }
 
 interface UsersProviderProps {
@@ -23,8 +23,8 @@ interface UsersProviderProps {
 const UsersContext = createContext<IUsersContext>({
     users: [],
     usersMap: null,
-    isLoading: false,
-    error: null,
+    isUsersLoading: false,
+    errorLoadingUsers: null,
 });
 
 const UsersProvider = ({ children }: UsersProviderProps): ReactElement => {
@@ -57,7 +57,14 @@ const UsersProvider = ({ children }: UsersProviderProps): ReactElement => {
     }, []);
 
     return (
-        <UsersContext.Provider value={{ users, usersMap, isLoading, error }}>
+        <UsersContext.Provider
+            value={{
+                users,
+                usersMap,
+                isUsersLoading: isLoading,
+                errorLoadingUsers: error,
+            }}
+        >
             {children}
         </UsersContext.Provider>
     );

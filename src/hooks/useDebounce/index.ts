@@ -27,7 +27,7 @@ function useDebounce<T extends (...args: any[]) => void>(
                 callbackRef.current(...args);
             }, delay);
         },
-        [callback, delay]
+        [delay]
     );
 
     return debouncedCallback;
